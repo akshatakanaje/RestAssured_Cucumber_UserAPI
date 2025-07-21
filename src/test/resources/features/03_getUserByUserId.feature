@@ -1,6 +1,5 @@
-Feature: GetUserByUserId
+Feature: Get User By UserId
 
-  @sanity
   Scenario: Check if Admin is able to GET user by valid User Id
     Given Admin set the GET request by user id
     When Admin sends the GET HTTP request by User Id

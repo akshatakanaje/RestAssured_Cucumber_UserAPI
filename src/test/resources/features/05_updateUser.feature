@@ -1,10 +1,15 @@
-Feature: Update User API
+Feature: Update User
 
   @sanity
   Scenario: Check if Admin is able to update a user with all valid credentials
     Given Admin set the PUT request with the valid request body and valid Endpoint
     When Admin sends HTTPS Request with request Body
-    Then Admin receives "200" "OK" Status for update user
+    Then Admin receives "200" "OK" Status with response body
+
+  Scenario: Check if Admin is able to update a user with only mandatory fields
+    Given Admin set the PUT request with the valid request body
+    When Admin sends HTTPS Request and request Body with mandatory
+    Then Admin receives "200" "Created" Status with response body
 
   Scenario: Check if Admin is able to update a user with invalid endpoint
     Given Admin set the PUT request with the valid request body
@@ -31,7 +36,12 @@ Feature: Update User API
     When Admin sends HTTPS Request and update request Body with no or invalid auth
     Then Admin receives "401" "Unauthorized" Status for update
 
+  Scenario: Check if User is able to update new User with invalid User ID
+    Given User sets the PUT request with Valid Endpoint and the request Body is missing the mandatory fields
+    When Admin sends HTTPS Request
+    Then User receives 400 Bad Request with error message
 
+  #first name
   Scenario: Check if Admin is able to update a user with first name as numeric
     Given Admin set the PUT request
     When Admin sends HTTPS Request and request Body with first name as numeric
@@ -44,15 +54,15 @@ Feature: Update User API
 
   Scenario: Check if Admin is able to update a user with Empty first name
     Given Admin set the PUT request
-    When Admin sends HTTPS Request and request Body with first name as empty
+    When Admin sends HTTPS Request and request Body with Invalid first name
     Then Admin receives "400" "Bad Request" Status with error message
 
   Scenario: Check if Admin is able to update a user with white space in first name
     Given Admin set the PUT request
-    When Admin sends HTTPS Request and request Body
+    When Admin sends HTTPS Request and request Body with white space in first name
     Then Admin receives "400" "Bad Request" Status with error message
 
-
+  #last name
   Scenario: Check if Admin is able to update a user with last name as numeric
     Given Admin set the PUT request
     When Admin sends HTTPS Request and request Body with last name as numeric
@@ -63,7 +73,17 @@ Feature: Update User API
     When Admin sends HTTPS Request and request Body with last name as empty
     Then Admin receives "400" "Bad Request" Status with error message
 
+  Scenario: Check if Admin is able to update a user with Empty last name
+    Given Admin set the PUT request
+    When Admin sends HTTPS Request and request Body with Invalid last name
+    Then Admin receives "400" "Bad Request" Status with error message
 
+  Scenario: Check if Admin is able to update a user with white space in last name
+    Given Admin set the PUT request
+    When Admin sends HTTPS Request and request Body with white space in last name
+    Then Admin receives "400" "Bad Request" Status with error message
+
+  #contact number
   Scenario: Check if Admin is able to update a user with contact number less than ten numbers
     Given Admin set the PUT request
     When Admin sends HTTPS Request and request Body with contact number less than ten numbers
@@ -84,7 +104,7 @@ Feature: Update User API
     When Admin sends HTTPS Request and request Body with contact number greater than ten numbers
     Then Admin receives "400" "Bad Request" Status with error message
 
-
+    #email
   Scenario: Check if Admin is able to update a user with Invalid email format
     Given Admin set the PUT request
     When Admin sends HTTPS Request and request Body with invalid email format
@@ -106,7 +126,6 @@ Feature: Update User API
     When Admin sends HTTPS Request and request Body with empty plot number
     Then Admin receives "400" "Bad Request" Status with error message
 
-
   Scenario: Check if Admin is able to update a user with Street as numeric
     Given Admin set the PUT request
     When Admin sends HTTPS Request and request Body with Street as numeric
@@ -122,7 +141,6 @@ Feature: Update User API
     When Admin sends HTTPS Request and request Body with Invalid Street
     Then Admin receives "400" "Bad Request" Status with error message
 
-
   Scenario: Check if Admin is able to update a user with country as numeric
     Given Admin set the PUT request
     When Admin sends HTTPS Request and request Body with country as numeric
@@ -137,7 +155,6 @@ Feature: Update User API
     Given Admin set the PUT request
     When Admin sends HTTPS Request and request Body with Invalid country
     Then Admin receives "400" "Bad Request" Status with error message
-
 
   Scenario: Check if Admin is able to update a user with zipcode as alphanumeric
     Given Admin set the PUT request

@@ -1,6 +1,5 @@
-Feature: GetUserByUserFirstName
+Feature: Get User By FirstName
 
-  @sanity
   Scenario: Check if Admin is able to GET User by valid User FirstName
     Given Admin set the GET request by user firstName
     When Admin sends the GET HTTP request by User firstName

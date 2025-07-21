@@ -1,6 +1,5 @@
-Feature: GetAllUsers
+Feature: Get All Users
 
-  @sanity
   Scenario: Check if Admin is able to Get All User List with valid credentials
     Given Admin set the GET request
     When Admin sends HTTPS Request with endpoint

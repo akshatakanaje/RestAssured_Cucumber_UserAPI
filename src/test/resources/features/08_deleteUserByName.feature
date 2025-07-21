@@ -1,6 +1,5 @@
-Feature: Delete User By UserID API
+Feature: Delete User By UserID
 
-  @sanity
   Scenario: Check if Admin is able to Delete user by valid User name
     Given Admin set the DELETE request by user name
     When Admin sends the DELETE HTTPS request by User name
